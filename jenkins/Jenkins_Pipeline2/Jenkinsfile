@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Git Clone') {
+            steps {
+                echo "Git cloning................."
+            }
+        }
+        stage('Building Application') {
+            steps {
+                echo "Building Application..............."
+            }
+        }
+        stage('Testing Application') {
+            steps {
+                echo "Testing Application............"
+            }
+        }
+        stage('Deploying Application') {
+            steps {
+                echo "Deploying Application.................."
+            }
+        }
+    }
+}

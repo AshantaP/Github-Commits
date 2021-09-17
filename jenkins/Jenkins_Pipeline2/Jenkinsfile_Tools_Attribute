@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven'
+    }
+    stages {
+        stage('Git Clone') {
+            steps {
+                echo "Git cloning................."
+            }
+        }
+        stage('Building Application') {
+            when {
+                expression {
+                    BRANCH_NAME == 'dev' && CODE_CHANGE == true
+                }
+            }
+            steps {
+                echo "Building Application..............."
+                sh "mvn clean install package"
+        }
+        stage('Testing Application') {
+            when {
+                expression {
+                    BRANCH_NAME == 'dev' || BRANCH_NAME == 'master' 
+                }
+            }
+            steps {
+                echo "Testing Application............"
+            }
+        }
+        stage('Deploying Application') {
+            steps {
+                echo "Deploying Application.................."
+            }
+        }
+    }
+}
